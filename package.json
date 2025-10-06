@@ -1,0 +1,57 @@
+{
+  "name": "eslint-plugin-todo-tickets",
+  "version": "1.0.0",
+  "description": "ESLint plugin to enforce TODO comments with ticket numbers",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "mutate": "stryker run",
+    "prepare": ""
+  },
+  "jest": {
+    "collectCoverage": true,
+    "transform": {},
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/test-project/"
+    ],
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(eslint/.*\\.js|@eslint/.*\\.js))"
+    ]
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "todo",
+    "ticket",
+    "jira",
+    "github"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@stryker-mutator/core": "^9.2.0",
+    "@stryker-mutator/jest-runner": "^9.2.0",
+    "eslint": "^8.48.0",
+    "jest": "^30.2.0"
+  },
+  "peerDependencies": {
+    "eslint": ">=7.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "files": [
+    "src",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ]
+}
