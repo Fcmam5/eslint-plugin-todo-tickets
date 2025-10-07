@@ -4,7 +4,9 @@ const plugin = require("../src/index.js");
 const rule = plugin.rules["todo-tickets"];
 
 const ruleTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2015, sourceType: "module" },
+  languageOptions: {
+    parserOptions: { ecmaVersion: 2015, sourceType: "module" },
+  },
 });
 
 ruleTester.run("todo-tickets", rule, {
