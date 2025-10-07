@@ -3,6 +3,16 @@
   "version": "1.0.0",
   "description": "ESLint plugin to enforce TODO comments with ticket numbers",
   "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fcmam5/eslint-plugin-todo-tickets.git"
+  },
+  "author": "Abdeldjalil Fortas (Fcmam5)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fcmam5/eslint-plugin-todo-tickets/issues"
+  },
+  "homepage": "https://github.com/Fcmam5/eslint-plugin-todo-tickets#readme",
   "scripts": {
     "test": "jest",
     "mutate": "stryker run",
@@ -35,13 +45,12 @@
     "jira",
     "github"
   ],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.37.0",
     "@stryker-mutator/core": "^9.2.0",
     "@stryker-mutator/jest-runner": "^9.2.0",
     "eslint": "^9.37.0",
+    "eslint-plugin-security": "^3.0.1",
     "jest": "^30.2.0"
   },
   "peerDependencies": {

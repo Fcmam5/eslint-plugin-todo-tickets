@@ -10,6 +10,7 @@ const DEFAULT_KEYWORDS = ["TODO", "FIXME", "BUG", "HACK"];
 const createPattern = (keywords, ticketPatterns) => {
   const keywordsPattern = keywords.join("|");
   const ticketPatternsGroup = ticketPatterns.map((p) => `(${p})`).join("|");
+  // eslint-disable-next-line security/detect-non-literal-regexp
   return new RegExp(
     `(${keywordsPattern})\\s+(${ticketPatternsGroup})(?::\\s+|\\s+)(.*)`,
     "i"
@@ -33,6 +34,7 @@ const create = (context) => {
       const match = todoPattern.exec(line);
       if (!match) {
         // Check if line starts with any keyword but doesn't match the pattern
+        // eslint-disable-next-line security/detect-non-literal-regexp
         const keywordMatch = new RegExp(
           `^\\s*(${keywords.join("|")})\\b`,
           // Stryker disable next-line StringLiteral
