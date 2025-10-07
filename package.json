@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Fcmam5/eslint-plugin-todo-tickets.git"
+    "url": "git+https://github.com/Fcmam5/eslint-plugin-todo-tickets.git"
   },
   "author": "Abdeldjalil Fortas (Fcmam5)",
   "license": "MIT",

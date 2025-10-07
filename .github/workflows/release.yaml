@@ -12,6 +12,9 @@ jobs:
   build:
     needs: lintAndTest
     runs-on: ubuntu-latest
+    environment:
+      name: release
+      url: https://github.com/Fcmam5/eslint-plugin-todo-tickets/releases
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
