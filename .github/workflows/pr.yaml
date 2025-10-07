@@ -1,15 +1,16 @@
-name: Pull-requests workflow
+name: Main workflow
 
 on:
   workflow_dispatch:
+  workflow_call:
   pull_request:
   push:
     branches:
       - master
 
 jobs:
-  buildAndTest:
-    name: Build and test
+  lintAndTest:
+    name: Lint and test
     runs-on: ubuntu-latest
 
     steps:
@@ -25,3 +26,21 @@ jobs:
       - run: npm test
       - run: npm run lint
       - run: npm run mutate
+  
+  runTestProject:
+    name: Run test project
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: test-project
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Use Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+        continue-on-error: true
