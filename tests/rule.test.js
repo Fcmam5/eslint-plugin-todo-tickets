@@ -70,5 +70,39 @@ ruleTester.run("todo-tickets", rule, {
         },
       ],
     },
+    {
+      code: "// TODO: Missing ticket",
+      options: [{ suggestPlaceholderWithTicket: "ABC-000" }],
+      errors: [
+        {
+          message: /must be followed by a valid ticket number/,
+          suggestions: [
+            {
+              desc: 'Insert placeholder ticket "ABC-000"',
+              output: "// TODO ABC-000: Missing ticket",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      code: "// FIXME missing colon",
+      options: [
+        {
+          suggestPlaceholderWithTicket: "JIRA-999",
+        },
+      ],
+      errors: [
+        {
+          message: /must be followed by a valid ticket number/,
+          suggestions: [
+            {
+              desc: 'Insert placeholder ticket "JIRA-999"',
+              output: "// FIXME JIRA-999: missing colon",
+            },
+          ],
+        },
+      ],
+    },
   ],
 });

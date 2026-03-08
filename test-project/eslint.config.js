@@ -19,6 +19,7 @@ export default [
             "#\\d+", // GitHub format (e.g., #42)
           ],
           keywords: ["TODO", "FIXME", "BUG", "HACK"],
+          suggestPlaceholderWithTicket: "ASMO-123",
         },
       ],
     },
