@@ -13,7 +13,7 @@ const createPattern = (keywords, ticketPatterns) => {
   // eslint-disable-next-line security/detect-non-literal-regexp
   return new RegExp(
     `(${keywordsPattern})\\s+(${ticketPatternsGroup})(?::\\s+|\\s+)(.*)`,
-    "i"
+    "i",
   );
 };
 
@@ -24,7 +24,9 @@ const create = (context) => {
   const keywords = config.keywords || DEFAULT_KEYWORDS;
   const todoPattern = createPattern(keywords, ticketPatterns);
 
-  const sourceCode = context.getSourceCode();
+  // Fallback for older ESLint versions
+  const sourceCode = context.sourceCode || context.getSourceCode();
+
   const comments = sourceCode.getAllComments();
 
   comments.forEach((comment) => {
@@ -38,7 +40,7 @@ const create = (context) => {
         const keywordMatch = new RegExp(
           `^\\s*(${keywords.join("|")})\\b`,
           // Stryker disable next-line StringLiteral
-          "i"
+          "i",
         ).exec(line);
         if (keywordMatch) {
           const keyword = keywordMatch[1];
@@ -46,7 +48,7 @@ const create = (context) => {
             node: comment,
             message: `"${keyword}" comment must be followed by a valid ticket number (e.g., ${ticketPatterns.join(
               // Stryker disable next-line StringLiteral
-              " or "
+              " or ",
             )})`,
             // Stryker disable ObjectLiteral
             loc: {
@@ -108,8 +110,59 @@ const rule = {
   create,
 };
 
-module.exports = {
+const plugin = {
   rules: {
     "todo-tickets": rule,
   },
 };
+
+const recommendedRules = {
+  "todo-tickets/todo-tickets": "error",
+};
+
+const jiraRecommendedRules = {
+  "todo-tickets/todo-tickets": [
+    "error",
+    { ticketPatterns: ["[A-Z]{2,}-\\d+"] },
+  ],
+};
+
+const githubRecommendedRules = {
+  "todo-tickets/todo-tickets": ["error", { ticketPatterns: ["#\\d+"] }],
+};
+
+plugin.configs = {
+  recommended: {
+    plugins: ["todo-tickets"],
+    rules: recommendedRules,
+  },
+  "flat/recommended": [
+    {
+      name: "todo-tickets/flat/recommended",
+      plugins: {
+        "todo-tickets": plugin,
+      },
+      rules: recommendedRules,
+    },
+  ],
+  "flat/jira-recommended": [
+    {
+      name: "todo-tickets/flat/jira-recommended",
+      plugins: {
+        "todo-tickets": plugin,
+      },
+      rules: jiraRecommendedRules,
+    },
+  ],
+  "flat/github-recommended": [
+    {
+      name: "todo-tickets/flat/github-recommended",
+      plugins: {
+        "todo-tickets": plugin,
+      },
+      rules: githubRecommendedRules,
+    },
+  ],
+};
+
+module.exports = plugin;

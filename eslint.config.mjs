@@ -1,12 +1,12 @@
 import js from "@eslint/js";
-import { defineConfig } from "eslint/config";
 import security from "eslint-plugin-security";
 
 export default defineConfig([
+  js.configs.recommended,
+  security.configs.recommended,
   {
-    files: ["**/*.{js,mjs,cjs}"],
-    plugins: { js, security },
-    extends: [security.configs.recommended],
+    files: ["**/*.js", "**/*.mjs", "**/*.cjs"],
+    languageOptions: { sourceType: "commonjs" },
+    plugins: { security },
   },
-  { files: ["**/*.js"], languageOptions: { sourceType: "commonjs" } },
 ]);

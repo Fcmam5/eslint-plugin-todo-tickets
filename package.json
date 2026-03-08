@@ -46,15 +46,15 @@
     "github"
   ],
   "devDependencies": {
-    "@eslint/js": "^9.37.0",
-    "@stryker-mutator/core": "^9.2.0",
-    "@stryker-mutator/jest-runner": "^9.2.0",
-    "eslint": "^9.37.0",
-    "eslint-plugin-security": "^3.0.1",
+    "@eslint/js": "^10.0.1",
+    "@stryker-mutator/core": "^9.6.0",
+    "@stryker-mutator/jest-runner": "^9.6.0",
+    "eslint": "^10.0.3",
+    "eslint-plugin-security": "^4.0.0",
     "jest": "^30.2.0"
   },
   "peerDependencies": {
-    "eslint": ">=7.0.0"
+    "eslint": ">=8.0.0"
   },
   "engines": {
     "node": ">=20.0.0"

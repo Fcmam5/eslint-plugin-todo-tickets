@@ -27,10 +27,24 @@ Add `todo-tickets` to the plugins section of your `.eslintrc` configuration file
 ```json
 {
   "plugins": ["todo-tickets"],
-  "rules": {
-    "todo-tickets/todo-tickets": "error"
-  }
+  "extends": ["plugin:todo-tickets/recommended"]
 }
+```
+
+Or using eslint.config.mjs:
+
+```javascript
+import js from '@eslint/js';
+import todoTickets from 'eslint-plugin-todo-tickets';
+
+export default [
+  js.configs.recommended,
+  ...todoTickets.configs['flat/recommended'],
+  {
+    files: ['**/*.js'],
+    // rule customizations go here
+  }
+];
 ```
 
 ## Configuration
