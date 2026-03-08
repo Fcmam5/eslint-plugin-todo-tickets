@@ -23,6 +23,8 @@ const create = (context) => {
   const ticketPatterns = config.ticketPatterns || DEFAULT_TICKET_PATTERNS;
   const keywords = config.keywords || DEFAULT_KEYWORDS;
   const todoPattern = createPattern(keywords, ticketPatterns);
+  // eslint-disable-next-line security/detect-non-literal-regexp
+  const keywordRegex = new RegExp(`^\\s*(${keywords.join("|")})\\b`, "i");
 
   // Fallback for older ESLint versions
   const sourceCode = context.sourceCode || context.getSourceCode();
@@ -35,13 +37,7 @@ const create = (context) => {
     lines.forEach((line, lineNumber) => {
       const match = todoPattern.exec(line);
       if (!match) {
-        // Check if line starts with any keyword but doesn't match the pattern
-        // eslint-disable-next-line security/detect-non-literal-regexp
-        const keywordMatch = new RegExp(
-          `^\\s*(${keywords.join("|")})\\b`,
-          // Stryker disable next-line StringLiteral
-          "i",
-        ).exec(line);
+        const keywordMatch = keywordRegex.exec(line);
         if (keywordMatch) {
           const keyword = keywordMatch[1];
           context.report({

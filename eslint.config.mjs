@@ -1,5 +1,6 @@
 import js from "@eslint/js";
 import security from "eslint-plugin-security";
+import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   js.configs.recommended,
